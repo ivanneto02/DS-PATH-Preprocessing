@@ -1,5 +1,4 @@
 import preprocessing.init
-import scraping#.here include the file for data scraping
 
 def main():
     # data scraping

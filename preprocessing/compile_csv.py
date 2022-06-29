@@ -1,8 +1,9 @@
 from utils.proceed import proceed
-
 from information import *
-
 import os
+import time
+import json
+import pandas as pd
 
 def main():
     # do stuff to compile csv
@@ -21,8 +22,41 @@ def main():
             # get all the files
             files = next(os.walk(DATA_PATH + "/" + source + "/" + letter))[2]
             for fil in files:
-                print(f"Getting {DATA_PATH}/{source}/{letter}/{fil}...")
+                # print(f"Getting {DATA_PATH}/{source}/{letter}/{fil}...") # reporting
                 total_paths.append(DATA_PATH + "/" + source + "/" + letter + "/" + fil)
+
+    print("Printing to make sure this works:")
+    for i in range(5):
+        print(total_paths[i])
+    print(f"Number of paths: {len(total_paths)}")
+
+    beginning = time.time()
+    df = pd.DataFrame()
+
+    concat_list = []
+
+    for i in range(len(total_paths)):
+        # read the current DataFrame
+        data = json.load(open(total_paths[i], "r"))
+        curr_df = pd.DataFrame.from_dict(data, orient="index").T 
+        concat_list.append(curr_df)
+
+    print(f"Concatenating...")
+    df = pd.concat(concat_list, axis=0)
+    print("Done concatenating.")
+
+    final = time.time()
+    print(f"Total time: {final - beginning} seconds")
+
+    print(df.head(3))
+
+    beginning = time.time()
+    print(f"Saving...")
+    df.reset_index()
+    df.to_csv(DATA_PATH + "/data.csv", index=False)
+    final = time.time()
+    print(f"Done saving.")
+    print(f"Time taken: {final - beginning}s")
 
 if __name__ == "__main__":
     print("""You are running this program without the usage of `main.py`

@@ -1,5 +1,4 @@
 from preprocessing import compile_csv
-from preprocessing import gather_sources
 from preprocessing import gather_definitions
 
 from utils import proceed
@@ -7,9 +6,6 @@ from utils import proceed
 def main():
     # compile csv
     compile_csv.main()
-
-    # gather sources
-    gather_sources.main()
 
     # gather definitions
     gather_definitions.main()
