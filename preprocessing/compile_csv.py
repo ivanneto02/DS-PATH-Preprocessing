@@ -1,15 +1,17 @@
 from utils.proceed import proceed
-from information import *
+from utils.information import *
 import os
 import time
 import json
 import pandas as pd
 
 def main():
+
     # do stuff to compile csv
     print("- compiling csv...")
 
     # Get all the letter folders
+    print(DATA_PATH)
     source_folders = next(os.walk(DATA_PATH))[1]
 
     total_paths = []
@@ -33,15 +35,15 @@ def main():
     beginning = time.time()
     df = pd.DataFrame()
 
+    print("Compiling many JSON items (this may take a while)...")
     concat_list = []
-
     for i in range(len(total_paths)):
         # read the current DataFrame
         data = json.load(open(total_paths[i], "r"))
         curr_df = pd.DataFrame.from_dict(data, orient="index").T 
         concat_list.append(curr_df)
 
-    print(f"Concatenating...")
+    print(f"Concatenating into .csv...")
     df = pd.concat(concat_list, axis=0)
     print("Done concatenating.")
 

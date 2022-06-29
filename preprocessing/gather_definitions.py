@@ -1,5 +1,5 @@
 from utils.proceed import proceed
-from information import *
+from utils.information import *
 import pandas as pd
 import time
 from bs4 import BeautifulSoup, SoupStrainer
@@ -62,6 +62,7 @@ def main():
         else:
             return None
 
+    print("Extracting many definitions (this may take a while)...")
     df_saved["definition"] = df_saved.apply(lambda x : parseDefinitions(x["raw_html"], x["source_name"]), axis=1)
 
     end_t = time.time()
