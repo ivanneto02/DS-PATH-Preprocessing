@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup, SoupStrainer
 
 def gather_definitions():
     # do stuff to gather definitions
-    print("- gathering definitions...")
+    print("> Gathering definitions...")
 
-    df_saved = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=10)
+    df_saved = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=None)
     df_saved.head(3)
 
     beg_t = time.time()
@@ -63,19 +63,19 @@ def gather_definitions():
         else:
             return None
 
-    print("Extracting many definitions (this may take a while)...")
+    print("> Extracting many definitions (this may take a while)...")
     df_saved["definition"] = df_saved.apply(lambda x : parseDefinitions(x["raw_html"], x["source_name"]), axis=1)
 
     end_t = time.time()
-    print(f"Total time: {end_t - beg_t}s")
+    print(f"> Total time: {end_t - beg_t}s")
 
     beginning = time.time()
-    print(f"Saving...")
+    print(f"> Saving...")
     df_saved.reset_index()
     df_saved.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
     final = time.time()
-    print(f"Done saving.")
-    print(f"Time taken: {final - beginning}s")
+    print(f"> Done saving.")
+    print(f"> Time taken: {final - beginning}s")
 
 if __name__ == "__main__":
     print("""You are running this program without the usage of `main.py`

@@ -8,9 +8,9 @@ import time
 
 def fix_sources():
     # do stuff to gather definitions
-    print("- Fixing the source column...")
+    print("> Fixing the source column...")
 
-    df = pd.read_csv(DATA_PATH + "/data.csv", nrows=10)
+    df = pd.read_csv(DATA_PATH + "/data.csv", nrows=None)
     df.head(10)
 
     print("Done.")

@@ -7,7 +7,7 @@ import pandas as pd
 
 def compile_csv():
     # do stuff to compile csv
-    print("- Compiling csv...")
+    print("> Compiling csv...")
 
     # Get all the letter folders
     print(DATA_PATH)
@@ -15,7 +15,7 @@ def compile_csv():
 
     total_paths = []
     # Iterate through all of the sources
-    for source in source_folders[:10]:#### REMOVE
+    for source in source_folders:
         # Get all the letter folders
         letter_folders = next(os.walk(DATA_PATH + "/" + source))[1]
         # Iterate through all of the letters
@@ -25,17 +25,17 @@ def compile_csv():
             for fil in files:
                 total_paths.append(DATA_PATH + "/" + source + "/" + letter + "/" + fil)
 
-    total_paths = total_paths[:100] #### REMOVE
+    total_paths = total_paths[:NFILES]
 
-    print("Printing to make sure this works:")
+    print("> Printing to make sure this works:")
     for i in range(5):
-        print(total_paths[i])
-    print(f"Number of paths: {len(total_paths)}")
+        print("    ", total_paths[i])
+    print(f"> Number of paths: {len(total_paths)}")
 
     beginning = time.time()
     df = pd.DataFrame()
 
-    print("Compiling many JSON items (this may take a while)...")
+    print("> Compiling many JSON items (this may take a while)...")
     concat_list = []
     for i in range(len(total_paths)):
         # read the current DataFrame
@@ -43,22 +43,22 @@ def compile_csv():
         curr_df = pd.DataFrame.from_dict(data, orient="index").T 
         concat_list.append(curr_df)
 
-    print(f"Concatenating into .csv...")
+    print(f"> Concatenating into .csv...")
     df = pd.concat(concat_list, axis=0)
-    print("Done concatenating.")
+    print("> Done concatenating.")
 
     final = time.time()
-    print(f"Total time: {final - beginning} seconds")
+    print(f"> Total time: {final - beginning} seconds")
 
     print(df.head(3))
 
     beginning = time.time()
-    print(f"Saving...")
+    print(f"> Saving...")
     df.reset_index()
     df.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
     final = time.time()
-    print(f"Done saving.")
-    print(f"Time taken: {final - beginning}s")
+    print(f"> Done saving.")
+    print(f"> Time taken: {final - beginning}s")
 
 if __name__ == "__main__":
     print("""You are running this program without the usage of `main.py`
