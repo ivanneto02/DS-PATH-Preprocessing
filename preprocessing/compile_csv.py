@@ -5,10 +5,9 @@ import time
 import json
 import pandas as pd
 
-def main():
-
+def compile_csv():
     # do stuff to compile csv
-    print("- compiling csv...")
+    print("- Compiling csv...")
 
     # Get all the letter folders
     print(DATA_PATH)
@@ -16,7 +15,7 @@ def main():
 
     total_paths = []
     # Iterate through all of the sources
-    for source in source_folders:
+    for source in source_folders[:10]:#### REMOVE
         # Get all the letter folders
         letter_folders = next(os.walk(DATA_PATH + "/" + source))[1]
         # Iterate through all of the letters
@@ -24,8 +23,9 @@ def main():
             # get all the files
             files = next(os.walk(DATA_PATH + "/" + source + "/" + letter))[2]
             for fil in files:
-                # print(f"Getting {DATA_PATH}/{source}/{letter}/{fil}...") # reporting
                 total_paths.append(DATA_PATH + "/" + source + "/" + letter + "/" + fil)
+
+    total_paths = total_paths[:100] #### REMOVE
 
     print("Printing to make sure this works:")
     for i in range(5):
@@ -55,7 +55,7 @@ def main():
     beginning = time.time()
     print(f"Saving...")
     df.reset_index()
-    df.to_csv(DATA_PATH + "/data.csv", index=False)
+    df.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
     final = time.time()
     print(f"Done saving.")
     print(f"Time taken: {final - beginning}s")
@@ -67,5 +67,5 @@ if __name__ == "__main__":
     scraped from the internet.\n""")
 
     if proceed():
-        main()
+        compile_csv()
 

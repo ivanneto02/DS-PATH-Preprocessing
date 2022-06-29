@@ -6,12 +6,14 @@ from utils.information import *
 import pandas as pd
 import time
 
-def main():
+def fix_sources():
     # do stuff to gather definitions
     print("- Fixing the source column...")
 
     df = pd.read_csv(DATA_PATH + "/data.csv", nrows=10)
     df.head(10)
+
+    print("Done.")
 
 if __name__ == "__main__":
     print("""You are running this program without the usage of `main.py`
@@ -20,4 +22,4 @@ if __name__ == "__main__":
     scraped from the internet.\n""")
 
     if proceed():
-        main()
+        fix_sources()

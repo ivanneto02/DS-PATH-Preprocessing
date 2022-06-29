@@ -1,14 +1,15 @@
+from asyncio import gather
 from utils.proceed import proceed
 from utils.information import *
 import pandas as pd
 import time
 from bs4 import BeautifulSoup, SoupStrainer
 
-def main():
+def gather_definitions():
     # do stuff to gather definitions
     print("- gathering definitions...")
 
-    df_saved = pd.read_csv(DATA_PATH + "/data.csv", nrows=None)
+    df_saved = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=10)
     df_saved.head(3)
 
     beg_t = time.time()
@@ -21,7 +22,7 @@ def main():
             string = ""
             if len(mydivs) == 0:
                 return None
-            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:6]
+            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
             for p in interest_p:
                 string += p.text
             return string
@@ -32,7 +33,7 @@ def main():
             string = ""
             if len(mydivs) == 0:
                 return None
-            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[1:6]
+            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
             for p in interest_p:
                 string += p.text
             return string
@@ -43,7 +44,7 @@ def main():
             string = ""
             if len(mydivs) == 0:
                 return None
-            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[1:6]
+            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
             for p in interest_p:
                 string += p.text
             return string
@@ -55,7 +56,7 @@ def main():
             string = ""
             if len(mydivs) == 0:
                 return None
-            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[1:6]
+            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
             for p in interest_p:
                 string += p.text
             return string
@@ -71,7 +72,7 @@ def main():
     beginning = time.time()
     print(f"Saving...")
     df_saved.reset_index()
-    df_saved.to_csv(DATA_PATH + "/data.csv", index=False)
+    df_saved.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
     final = time.time()
     print(f"Done saving.")
     print(f"Time taken: {final - beginning}s")
@@ -83,5 +84,5 @@ if __name__ == "__main__":
     scraped from the internet.\n""")
 
     if proceed():
-        main()
+        gather_definitions()
 
