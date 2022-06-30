@@ -3,6 +3,11 @@ from utils.information import *
 
 def print_fewlines():
     df = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=10)
+
+    for i in range(5):
+        print(df["definition"].values[i])
+        print("==============================")
+
     print(df.head(10))
 
 if __name__ == "__main__":
