@@ -19,7 +19,6 @@ def gather_definitions():
             parse_only = SoupStrainer(attrs = {"class" : "contentBox"})
             bs = BeautifulSoup(raw_html, "lxml", parse_only=parse_only)
             mydivs = bs.find_all("div", attrs={"class": "contentBox"})
-            string = ""
             if len(mydivs) == 0:
                 return None
             interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
