@@ -1,6 +1,7 @@
+from distutils.command.clean import clean
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
-from utils.information import DATA_PATH, NFILES, OUT_FILE
+from utils.information import *
 import pandas as pd
 import re
 import nltk
@@ -26,6 +27,7 @@ def lemmatize(x):
     return " ".join([ lemmatizer.lemmatize(word) for word in w_tokenizer.tokenize(x) ])
 
 def create_weighted_tfidf():
+    return # TODO
     beg = time.time()
     # Read in data
     print("> Reading DataFrame...")
@@ -34,25 +36,39 @@ def create_weighted_tfidf():
     print("> Shuffling...")
     df = shuffle(df)
 
+    df_dru = df[df["concept_type"] == "drug"]
+    df_dis = df[df["concept_type"] == "disease"]
+
+    dru_features = FEATURES*(len(df_dru)/len(df))
+    dis_features = FEATURES*(len(df_dis)/len(df))
+
+    df["doc"] = df["raw_html"].apply(remove_html).apply(clean_strings).apply(lemmatize).reset_index(drop=True)
+
     b = time.time()
-    # Remove HTML, clean strings, and lemmatize
-    print("> Stripping HTML, cleaning up strings, lemmatize...")
-    documents = df["raw_html"].apply(remove_html).apply(clean_strings).apply(lemmatize)
-    print(len(documents))
+    print("> Vectorizing drug concepts...")
+    dru_vectorizer = TfidfVectorizer(max_features=dru_features, stop_words="english", ngram_range=(1, 3))
+    dru_vectorizer = dru_vectorizer.fit(dru_docs)
+    dru_vectors = dru_vectorizer.transform(df)
+    dru_features = dru_vectorizer.get_feature_names()
+    e = time.time()
+    print(f"> Time taken: {e - b}s")
+    b = time.time()
+    print("> Vectorizing disease concepts...")
+    dis_vectorizer = TfidfVectorizer(max_features=dis_features, stop_words="english", ngram_range=(1, 3))
+    dis_vectorizer = dis_vectorizer.fit(dis_docs)
+    dis_vectors = dis_vectorizer.transform(dis_docs)
+    dis_features = dis_vectorizer.get_feature_names()
     e = time.time()
     print(f"> Time taken: {e - b}s")
 
-    print("> Creating train/test split...")
-    x_train = documents#, x_test = train_test_split(documents, test_size=0.0)
-
-    b = time.time()
-    print("> Vectorizing the corpus...")
-    vectorizer = TfidfVectorizer(max_features=300, stop_words="english", ngram_range=(1, 3))
-    vectorizer = vectorizer.fit(x_train)
-    vectors = vectorizer.transform(x_train)
-    feature_names = vectorizer.get_feature_names()
-    e = time.time()
-    print(f"> Time taken: {e - b}s")
+    print("> Making Results DataFrame...")
+    dru_results = pd.DataFrame(dru_vectors.toarray(), columns=dru_features).reset_index(drop=True)
+    dis_results = pd.DataFrame(dis_vectors.toarray(), columns=dis_features).reset_index(drop=True)
+    df_dru = df_dru.reset_index(drop=True)
+    df_dis = df_dis.reset_index(drop=True)
+    df = df.reset_index(drop=True)
+    results = pd.concat([dru_results, dis_results], axis=1)
+    df = pd.concat([df, results], axis=1)
 
     b = time.time()
     print("> Making Results DataFrame...")
