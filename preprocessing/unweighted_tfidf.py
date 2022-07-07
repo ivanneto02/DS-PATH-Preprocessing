@@ -31,9 +31,6 @@ def create_unweighted_tfidf():
     print("> Reading DataFrame...")
     df = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=NFILES)
 
-    print("> Shuffling...")
-    df = shuffle(df)
-
     b = time.time()
     # Remove HTML, clean strings, and lemmatize
     print("> Stripping HTML, cleaning up strings, lemmatize...")
