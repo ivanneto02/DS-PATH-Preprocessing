@@ -15,17 +15,18 @@ def gather_definitions():
     beg_t = time.time()
 
     def parseDefinitions(raw_html, source_name):
-        if source_name == "drugs.com": # drugs.com is the source
+        if "drugs.com" in source_name.lower(): # drugs.com is the source
             parse_only = SoupStrainer(attrs = {"class" : "contentBox"})
             bs = BeautifulSoup(raw_html, "lxml", parse_only=parse_only)
             mydivs = bs.find_all("div", attrs={"class": "contentBox"})
+            string = ""
             if len(mydivs) == 0:
                 return None
             interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
             for p in interest_p:
                 string += p.text
             return string
-        elif source_name == "Mayoclinic": # Mayoclinic is the source
+        elif "mayoclinic" in source_name.lower(): # Mayoclinic is the source
             parse_only = SoupStrainer(attrs = {"id" : "main-content"})
             bs = BeautifulSoup(raw_html, "lxml", parse_only=parse_only)
             mydivs = bs.find_all("div", attrs={"id" : "main-content"})
@@ -36,7 +37,7 @@ def gather_definitions():
             for p in interest_p:
                 string += p.text
             return string
-        elif source_name == "WebMD": # WebMD is the source
+        elif "webmd" in source_name.lower(): # WebMD is the source
             parse_only = SoupStrainer(attrs = {"class" : "monograph-content monograph-content-holder"})
             bs = BeautifulSoup(raw_html, "lxml", parse_only=parse_only)
             mydivs = bs.find_all("div", attrs={"class" : "monograph-content monograph-content-holder"})
@@ -47,11 +48,35 @@ def gather_definitions():
             for p in interest_p:
                 string += p.text
             return string
-        elif source_name == "Medline": # Medline is the source
+        elif "medline" in source_name.lower(): # Medline is the source
             # section-body
             parse_only = SoupStrainer(attrs = {"class" : "section-body"})
             bs = BeautifulSoup(raw_html, "lxml", parse_only=parse_only)
             mydivs = bs.find_all("div", attrs={"class" : "section-body"})
+            string = ""
+            if len(mydivs) == 0:
+                return None
+            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
+            for p in interest_p:
+                string += p.text
+            return string
+        elif "cdc" in source_name.lower():
+            # section-body
+            parse_only = SoupStrainer(attrs = {"class" : "col-md-12 splash-col"})
+            bs = BeautifulSoup(raw_html, "lxml", parse_only=parse_only)
+            mydivs = bs.find_all("div", attrs={"class" : "col-md-12 splash-col"})
+            string = ""
+            if len(mydivs) == 0:
+                return None
+            interest_p = mydivs[0].find_all("p", attrs={"class" : None})[0:]
+            for p in interest_p:
+                string += p.text
+            return string
+        elif "nhs" in source_name.lower():
+            # section-body
+            parse_only = SoupStrainer(attrs = {"class" : "js-guide cf guide"})
+            bs = BeautifulSoup(raw_html, "lxml", parse_only=parse_only)
+            mydivs = bs.find_all("div", attrs={"class" : "tab js-guide__section guide__section active"})
             string = ""
             if len(mydivs) == 0:
                 return None
@@ -84,4 +109,3 @@ if __name__ == "__main__":
 
     if proceed():
         gather_definitions()
-

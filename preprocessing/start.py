@@ -12,7 +12,7 @@ def start():
     compile_csv()
 
     # gather definitions
-    gather_definitions()
+    # gather_definitions()
 
     # create unweighted TFIDF scores
     create_weighted_tfidf()
