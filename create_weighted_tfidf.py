@@ -1,4 +1,4 @@
-import preprocessing
+import src.preprocessing as preprocessing
 
 def main():
     # Create the unweighted TFIDF scores

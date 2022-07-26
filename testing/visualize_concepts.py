@@ -1,5 +1,5 @@
 import pandas as pd
-from utils.information import *
+from config import *
 import matplotlib.pyplot as plt
 
 def visualize_concepts():

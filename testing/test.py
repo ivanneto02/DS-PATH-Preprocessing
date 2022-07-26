@@ -1,5 +1,5 @@
 import pandas as pd
-from utils.information import *
+from config import *
 
 def print_fewlines():
     df = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=10)

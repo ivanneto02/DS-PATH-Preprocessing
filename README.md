@@ -14,7 +14,6 @@ Further, this preprocessing step will create both (1) weighted TF-IDF vectors fo
 2. Install packages
 3. Run program
 
-
 The following cell is the file structure of the project.
 
 ---
@@ -22,27 +21,29 @@ The following cell is the file structure of the project.
 ```
 .
 ├──project
-|	├── preprocessing
-|	|	├── __init__.py
-|	|	├── compile_csv.py
-|	|	├── fix_sources.py
-|	|	├── gather_definitions.py
-|	|	├── start.py
-|	|	├── unweighted_tfidf.py
-|	|	└── weightedt_tfidf.py
-|	├── utils
-|	|	├── __init__.py
-|	|	├── information.py
-|	|	└── proceed.py
-|	├── testing
-|	|	├── __init__.py
-|	|	├── visualize_concepts.py
-|	|	└── test.py
-|	├── main.py
-|	├── create_unweighted_tfidf.py
-|	├── create_weighted_tfidf.py
-|	├── preprocess.py
-|	└── scrape.py # WORK IN PROGRESS
+|  ├── src
+|  |  ├── preprocessing
+|  |  |  ├── __init__.py
+|  |  |  ├── compile_csv.py
+|  |  |  ├── fix_sources.py
+|  |  |  ├── gather_definitions.py
+|  |  |  ├── start.py
+|  |  |  ├── unweighted_tfidf.py
+|  |  |  └── weightedt_tfidf.py
+|  ├── utils
+|  |  ├── __init__.py
+|  |  ├── information.py
+|  |  └── proceed.py
+|  ├── testing
+|  |  ├── __init__.py
+|  |  ├── visualize_concepts.py
+|  |  └── test.py
+|  ├── main.py
+|  ├── create_unweighted_tfidf.py
+|  ├── create_weighted_tfidf.py
+|  ├── preprocess.py
+|  ├── config.py
+|  └── scrape.py # WORK IN PROGRESS
 ```
 
 ---
