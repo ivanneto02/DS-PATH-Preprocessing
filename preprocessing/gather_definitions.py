@@ -1,6 +1,6 @@
 from asyncio import gather
 from utils.proceed import proceed
-from utils.information import *
+from config import *
 import pandas as pd
 import time
 from bs4 import BeautifulSoup, SoupStrainer

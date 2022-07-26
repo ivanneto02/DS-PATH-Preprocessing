@@ -1,5 +1,5 @@
 from utils.proceed import proceed
-from utils.information import *
+from config import *
 import os
 import time
 import json

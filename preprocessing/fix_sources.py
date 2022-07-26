@@ -1,8 +1,7 @@
 import sys
 sys.path.insert(0, "")
-
 from utils.proceed import proceed
-from utils.information import *
+from config import *
 import pandas as pd
 import time
 

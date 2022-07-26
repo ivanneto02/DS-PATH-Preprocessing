@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
-from utils.information import DATA_PATH, NFILES, OUT_FILE
+from config import *
 import pandas as pd
 import re
 import nltk

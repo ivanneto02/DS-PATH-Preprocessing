@@ -1,7 +1,7 @@
 from distutils.command.clean import clean
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
-from utils.information import *
+from config import *
 import pandas as pd
 import re
 import nltk
