@@ -17,18 +17,15 @@ def map_to_umls():
         user = MYSQL_USERNAME,
         password = MYSQL_PASSWORD)
 
-    print("> STEP 1: Using MySql keyword \"LIKE\" keyword")
+    print("> STEP 1: Using MySQL keyword \"LIKE\" keyword")
     df = run_first_step(df, connection)
-
     if not os.path.exists(BARE_TABLE_SAVE_PATH):
         os.makedirs(BARE_TABLE_SAVE_PATH)
-    df.to_csv(BARE_TABLE_SAVE_PATH + "/" + BARE_TABLE_OUT_FILE, index=False)
+    df.to_csv(BARE_TABLE_SAVE_PATH + "/" + BARE_TABLE_OUT_FILE_STEP_1, index=False)
 
-    return
-
-    print("> STEP 2: Using Edit Distance to map unknown concepts")
+    print("> STEP 2: Using more complicated algorithm with MySQL keyword \"LIKE\" keyword")
     df = run_second_step(df, connection)
-
-    # This DataFrame object contains strings mapped to CUIs (hopefully)
-    # will be used for analysis of this method
-    return df
+    if not os.path.exists(BARE_TABLE_SAVE_PATH):
+        os.makedirs(BARE_TABLE_SAVE_PATH)
+    df.to_csv(BARE_TABLE_SAVE_PATH + "/" + BARE_TABLE_OUT_FILE_STEP_2, index=False)
+    print("> Done.")
