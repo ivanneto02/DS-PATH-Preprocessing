@@ -9,10 +9,10 @@ from src.DataVisualization import source_graphs
 import os
 
 def run_visualizations():
-    print("> Starting the visualization process"))
+    print("> Starting the visualization process")
     # connect to database, return connection
     print("> Reading dataset")
-    df = pd.read_csv(DATA_PATH + "/" + FULL_TABLE_IN_FILE, nrows=None)
+    df = pd.read_csv(DATA_PATH + "/" + BARE_TABLE_IN_FILE, nrows=None)
 
     print("> Creating source graphs")
     source_graphs(df=df)

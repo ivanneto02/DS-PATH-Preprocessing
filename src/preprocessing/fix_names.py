@@ -10,23 +10,16 @@ Currently not working very well. Will have to fix in the future.
 - Ivan
 '''
 
-def source_specific_fix(source_name, source_url):
-    if "health.ri.gov" in source_url:
-        return "RIDH"
-    elif "medline" in source_url:
-        return "Medline"
-    elif "www.drugs.com" in source_url:
-        return "Drugs.com"
-    else:
-        return source_name
+def name_fixes(name):
+    return name
 
-def fix_sources():
+def fix_names():
     # do stuff to gather definitions
     print("> Fixing the source column...")
     df = pd.read_csv(DATA_PATH + "/" + FULL_TABLE_IN_FILE, nrows=None)
 
     # Apply fixes
-    df["source_name"] = df.apply(lambda x : source_specific_fix(x["source_name"], x["source_url"]), axis=1)
+    df["names"] = df.apply(lambda x : name_fixes(x["name"]), axis=1)
 
     # Save
     print("> Saving full table")
@@ -45,4 +38,4 @@ if __name__ == "__main__":
     scraped from the internet.\n""")
 
     if proceed():
-        fix_sources()
+        fix_names()

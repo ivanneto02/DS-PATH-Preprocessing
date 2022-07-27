@@ -1,7 +1,7 @@
 import testing
 
 def main():
-    testing.check_redundant_queries()
+    testing.test_cui_dist()
 
 if __name__ == "__main__":
     main()
