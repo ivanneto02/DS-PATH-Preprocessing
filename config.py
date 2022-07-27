@@ -17,6 +17,8 @@ FULL_TABLE_IN_FILE = os.environ["FULL_TABLE_IN_FILE"]
 FULL_TABLE_OUT_FILE = os.environ["FULL_TABLE_OUT_FILE"]
 BARE_TABLE_IN_FILE = os.environ["BARE_TABLE_IN_FILE"]
 BARE_TABLE_OUT_FILE = os.environ["BARE_TABLE_OUT_FILE"]
+BARE_TABLE_OUT_FILE_STEP_1 = os.environ["BARE_TABLE_OUT_FILE_STEP_1"]
+BARE_TABLE_OUT_FILE_STEP_2 = os.environ["BARE_TABLE_OUT_FILE_STEP_2"]
 NFILES = int(os.environ["N_FILES"]) if "None" not in os.environ["N_FILES"] else None
 FEATURES = int(os.environ["FEATURES"])
 
