@@ -99,6 +99,8 @@ Now, install the following packages using the pip installs packages (pip)
 > pip install bs4
 > pip install sklearn
 > pip install nltk
+> pip install mysql-connector-python
+> pip install python-dotenv
 ```
 
 Note: `cchardet` is a package that speeds up the preprocessing of the data by allowing BeautifulSoup (`bs4`) to be more quickly instantiated given a raw HTML string.

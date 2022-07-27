@@ -16,7 +16,7 @@ def compile_csv():
     total_paths = []
     # Iterate through all of the sources
     for source in source_folders:
-        curr = ""
+        curr = "None"
         if "disease" in source.lower():
             curr = "disease"
         elif "drug" in source.lower():
@@ -59,9 +59,14 @@ def compile_csv():
     print(df.head(3))
 
     beginning = time.time()
-    print(f"> Saving...")
+    print(f"> Saving full table...")
     df.reset_index()
-    df.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
+    df.to_csv(DATA_PATH + "/" + FULL_TABLE_OUT_FILE, index=False)
+    print(f"> Saving bare table...")
+    df.drop(columns=["raw_html"], inplace=True)
+    if not os.path.exists(BARE_TABLE_SAVE_PATH):
+        os.makedirs(BARE_TABLE_SAVE_PATH)
+    df.to_csv(BARE_TABLE_SAVE_PATH + "/" + BARE_TABLE_OUT_FILE, index=False)
     final = time.time()
     print(f"> Done saving.")
     print(f"> Time taken: {final - beginning}s")

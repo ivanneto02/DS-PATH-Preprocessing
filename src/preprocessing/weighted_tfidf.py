@@ -31,7 +31,7 @@ def create_weighted_tfidf():
     beg = time.time()
     # Read in data
     print("> Reading DataFrame...")
-    df = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=NFILES)
+    df = pd.read_csv(DATA_PATH + "/" + FULL_TABLE_IN_FILE, nrows=NFILES)
 
     print("> Shuffling...")
     df = shuffle(df)
@@ -81,7 +81,7 @@ def create_weighted_tfidf():
 
     b = time.time()
     print("> Saving...")
-    df.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
+    df.to_csv(DATA_PATH + "/" + FULL_TABLE_OUT_FILE, index=False)
     print("> Done!")
     end = time.time()
 

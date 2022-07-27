@@ -20,9 +20,9 @@ def selection_prompt():
     print("    2. Run package subset")
 
     inp = input("\nChoice: ")
-    while (inp != "1") or (inp != "2"):
+    while (inp != "1") and (inp != "2"):
         print("Wrong input! Try again.")
-        inp = input("Choice:")
+        inp = input("Choice: ")
     
     inp = int(inp)
     if inp == 1:
@@ -53,7 +53,7 @@ def start():
 
 '''Runs user selected subset of package'''
 def start_subset():
-    subset_in_order = [] # empty = no subset
+    subset_in_order = [compile_csv, fix_sources] # empty = no subset
     for function in subset_in_order:
         function()
 

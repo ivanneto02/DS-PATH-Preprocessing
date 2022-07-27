@@ -29,7 +29,7 @@ def create_unweighted_tfidf():
     beg = time.time()
     # Read in data
     print("> Reading DataFrame...")
-    df = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=NFILES)
+    df = pd.read_csv(DATA_PATH + "/" + FULL_TABLE_IN_FILE, nrows=NFILES)
 
     b = time.time()
     # Remove HTML, clean strings, and lemmatize
@@ -62,7 +62,7 @@ def create_unweighted_tfidf():
 
     b = time.time()
     print("> Saving...")
-    df.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
+    df.to_csv(DATA_PATH + "/" + FULL_TABLE_OUT_FILE, index=False)
     print("> Done!")
     end = time.time()
 

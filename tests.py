@@ -1,7 +1,7 @@
 import testing
 
 def main():
-    testing.visualize_concepts()
+    testing.check_redundant_queries()
 
 if __name__ == "__main__":
     main()

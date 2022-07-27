@@ -9,7 +9,7 @@ def gather_definitions():
     # do stuff to gather definitions
     print("> Gathering definitions...")
 
-    df_saved = pd.read_csv(DATA_PATH + "/" + OUT_FILE, nrows=None)
+    df_saved = pd.read_csv(DATA_PATH + "/" + FULL_TABLE_IN_FILE, nrows=None)
     df_saved.head(3)
 
     beg_t = time.time()
@@ -96,7 +96,7 @@ def gather_definitions():
     beginning = time.time()
     print(f"> Saving...")
     df_saved.reset_index()
-    df_saved.to_csv(DATA_PATH + "/" + OUT_FILE, index=False)
+    df_saved.to_csv(DATA_PATH + "/" + FULL_TABLE_OUT_FILE, index=False)
     final = time.time()
     print(f"> Done saving.")
     print(f"> Time taken: {final - beginning}s")
