@@ -12,6 +12,5 @@ def get_cui(x, connection):
     return CUI[0][0]
 
 def run_first_step(df=None, connection=None):
-    CUIs = []
     df["CUI"] = df["name"].apply(lambda x: get_cui(x, connection))
     return df

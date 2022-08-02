@@ -1,7 +1,7 @@
-import testing
+from testing import *
 
 def main():
-    testing.test_cui_dist()
+    display_data()
 
 if __name__ == "__main__":
     main()

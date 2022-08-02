@@ -10,6 +10,8 @@ def map_to_umls():
     df = pd.read_csv(BARE_TABLE_SAVE_PATH + "/" + BARE_TABLE_IN_FILE, nrows=None)
     print(f"     length: {len(df)}")
 
+    df["name"] = df["name"].str.strip()
+
     print("> Establishing MySql connection")
     connection = connector.connect(
         host = MYSQL_HOST,
