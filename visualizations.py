@@ -3,6 +3,7 @@ import pandas as pd
 from src.DataVisualization import source_graphs
 from src.DataVisualization import step_one_graphs
 from src.DataVisualization import step_two_graphs
+from src.DataVisualization import step_three_graphs
 
 def run_visualizations():
     print("> Starting the visualization process")
@@ -19,6 +20,10 @@ def run_visualizations():
     df_step2 = pd.read_csv(BARE_TABLE_SAVE_PATH + "/" + BARE_TABLE_OUT_FILE_STEP_2, nrows=None)
     print("> Creating CUIs graph (STEP 2)")
     step_two_graphs(df=df_step2)
+
+    df_step3 = pd.read_csv(BARE_TABLE_SAVE_PATH + "/" + BARE_TABLE_OUT_FILE_STEP_3, nrows=None)
+    print("> Creating CUIs graph (STEP 3)")
+    step_three_graphs(df=df_step3)
 
 if __name__ == "__main__":
     run_visualizations()
