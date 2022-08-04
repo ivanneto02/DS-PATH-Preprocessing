@@ -60,6 +60,7 @@ def compile_csv():
 
     beginning = time.time()
     print(f"> Saving full table...")
+    df["name"] = df["name"].str.strip()
     df.reset_index()
     df.to_csv(DATA_PATH + "/" + FULL_TABLE_OUT_FILE, index=False)
     print(f"> Saving bare table...")

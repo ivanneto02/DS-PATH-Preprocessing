@@ -5,6 +5,8 @@ from .gather_definitions import gather_definitions
 from .unweighted_tfidf import create_unweighted_tfidf
 from .weighted_tfidf import create_weighted_tfidf
 
+from src.ConceptTableBuilder import map_to_umls
+
 from utils import proceed
 
 def selection_prompt():
@@ -47,13 +49,14 @@ def start():
     # create weighted TFIDF scores
     create_unweighted_tfidf() 
 
-    # create concept table
+    # map cuis
+    map_to_umls()
 
     # create relational tables
 
 '''Runs user selected subset of package'''
 def start_subset():
-    subset_in_order = [compile_csv, fix_sources] # empty = no subset
+    subset_in_order = [compile_csv, fix_sources, map_to_umls] # empty = no subset
     for function in subset_in_order:
         function()
 
