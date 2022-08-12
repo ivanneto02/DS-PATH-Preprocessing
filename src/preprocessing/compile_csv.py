@@ -44,10 +44,14 @@ def compile_csv():
     concat_list = []
     for i in range(len(total_paths)):
         # read the current DataFrame
-        data = json.load(open(total_paths[i][1], "r"))
-        curr_df = pd.DataFrame.from_dict(data, orient="index").T
-        curr_df["concept_type"] = total_paths[i][0]
-        concat_list.append(curr_df)
+        try:
+            data = json.load(open(total_paths[i][1], "r"))
+            curr_df = pd.DataFrame.from_dict(data, orient="index").T
+            curr_df["concept_type"] = total_paths[i][0]
+            concat_list.append(curr_df)
+        except Exception as e:
+            print(total_paths[i])
+            print(e)
 
     print(f"> Concatenating into .csv...")
     df = pd.concat(concat_list, axis=0)
